@@ -1,5 +1,7 @@
 <template>
   <base-container title="Vuex"></base-container>
+  <h3>0</h3>
+  <button>Add 1</button>
 </template>
 
 <script>

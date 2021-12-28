@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>{{ title }}</h2>
-    <slot></slot>
+    <slot></slot> 
   </section>
 </template>
 

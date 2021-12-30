@@ -1,14 +1,14 @@
 import { createApp } from 'vue';
 
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
 
 import App from './App.vue';
 
-const store = createStore({
+const counterModule = {
     state() {
         return {
             counter: 0,
-        };
+        }
     },
     mutations: {
         increment(state) {
@@ -16,7 +16,7 @@ const store = createStore({
         },
         increase(state, payload) {
             state.counter = state.counter + payload.value;
-        }
+        },
     },
     actions: {
         increment(context) {
@@ -26,7 +26,7 @@ const store = createStore({
         },
         increase(context, payload) {
             context.commit('increase', payload);
-        }
+        },
     },
     getters: {
         finalCounter(state) {
@@ -41,6 +41,35 @@ const store = createStore({
                 return 100;
             }
             return finalCounter;
+        },
+    }
+};
+
+const store = createStore({
+    modules: {
+        number: counterModule
+    },
+    state() {
+        return {
+            isLoggedIn: false,
+        };
+    },
+    mutations: {
+        setAuth(state, payload) {
+            state.isLoggedIn = payload.isAuth
+        }
+    },
+    actions: {
+        login(context) {
+            context.commit('setAuth', { isAuth: true })
+        },
+        logout(context) {
+            context.commit('setAuth', { isAuth: false })
+        }
+    },
+    getters: {
+        userIsAuthenticated(state) {
+            return state.isLoggedIn
         }
     },
 
